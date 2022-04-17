@@ -33,6 +33,8 @@ implementation 'com.github.NByida:tinyLeak:v1.0.0'
 ```
 
 3 在application里注册
+
+kotlin 写法：
 ```
 
 class MyApplication:Application() {
@@ -48,6 +50,22 @@ class MyApplication:Application() {
 
 
 }
+```
+
+java写法：
+
+```
+LifecycleDetector.INSTANCE.activityLifeObserver(this, activity -> {
+                    Log.e(TAG, "activity  " + activity.getClass().getSimpleName() + "  leaked");
+                    return null;
+                }
+                ,
+                fragment -> {
+                    Log.e(TAG, "fragment  " + fragment.getClass().getSimpleName() + "  leaked");
+                    return null;
+                },
+                5
+        );
 ```
 
 至此，就可以监控到activity和fragment的泄漏事件了
