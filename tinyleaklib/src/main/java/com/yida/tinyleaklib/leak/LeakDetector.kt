@@ -88,13 +88,16 @@ object LeakDetector {
                     false
                 }
             } else {
-                myHandler.post {
+                if (myHandler == null) {
+                    myHandler = Handler(Looper.myLooper()!!)
+                }
+                myHandler?.post {
                     checkActivity()
                 }
             }
         }
     }
 
-    var myHandler = Handler(Looper.myLooper()!!)
+    var myHandler :Handler?=null
 
 }
