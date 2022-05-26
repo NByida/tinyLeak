@@ -1,11 +1,11 @@
-# tinyLeak是一款内存泄漏检测工具
+# tinyLeak是一款内存泄漏检测工具,请勿用于线上
 
 - 他能监控activity和fragment的泄漏
-- 和leakcanary对比，tinyLeak只做前期的泄漏检查功能，并不分析泄漏的引用关系，所以免去了dump内存的步骤，可以在线上使用
+- 和leakcanary对比，tinyLeak只做前期的泄漏检查功能，并不分析泄漏的引用关系，所以免去了dump内存的步骤
 - leakcanary 需要dump内存，分析引用关系，所以没办法再线上使用
 - leakcanary 需要dump内存，开发环境中有泄漏的情况下会一直dump内存，没办法先忽略再集中一次性修改，因为一直dump严重影响开发效率
 - tinyLeak可以监控线上的内存泄漏情况
-- 如果是线下开发环境，可以使用as的Profiler来分析泄漏原因，如果是线上，可以进行上报统计
+- 如果是线下开发环境，可以使用as的Profiler来分析泄漏原因
 
 ---
  
@@ -18,7 +18,7 @@
 allprojects {
 		repositories {
 			...
-			maven { url 'https://jitpack.io' }
+			maven { url 'http://192.168.31.241:8081/artifactory/meme_maven/' }
 		}
 	}
 	
@@ -29,7 +29,7 @@ allprojects {
 2 Add the dependency
 
 ```
-implementation 'com.github.NByida:tinyLeak:v1.0.0'
+implementation 'com.memezhibo.sdk:tinyleak:1.0.0'
 ```
 
 3 在application里注册

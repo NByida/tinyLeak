@@ -3,6 +3,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven'
+apply plugin: 'com.jfrog.artifactory'
+
 group ='com.github.nbyida'
 
 android {
@@ -46,5 +48,43 @@ repositories {
     maven{
         url 'https://maven.google.com/'
         name 'Google'
+    }
+}
+
+
+artifactory {
+    contextUrl = "http://192.168.31.241:8082/artifactory/"
+    //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = 'tinyLeakaar-release'
+            username = "admin"
+            password = "123kaibola"
+            maven = true
+
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'tinyleak'
+            username = "admin"
+            password = "123kaibola"
+            maven = true
+        }
+    }
+}
+
+
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "http://192.168.31.241:8082/artifactory/meme_maven/") {
+            authentication(userName: "admin", password: "123kaibola")
+        }
+        pom.project {
+            groupId "com.memezhibo.sdk"
+            artifactId "tinyleak"
+            version "1.0.0"
+        }
     }
 }
